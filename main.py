@@ -4,9 +4,19 @@ from tkinter import ttk
 
 
 def app():
+    def disable_financing():
+        if b_is_member.get() == "0":
+            financin_yes_rbtn.config(state="disabled")
+            financin_no_rbtn.config(state="disabled")
+
+        if b_is_member.get() == "1":
+            financin_yes_rbtn.config(state="normal")
+            financin_no_rbtn.config(state="normal")
+
     def cal_membership():
         if b_is_member.get() == "0":
             d_total_price.set(d_entry_product_price.get())
+
 
         if b_is_member.get() == "1":
             temp = float(d_entry_product_price.get()) * 0.05
@@ -16,25 +26,25 @@ def app():
             result = round(result, 2)
             d_total_price.set(str(result))
 
-    # def cal_financing():
-    #     if want_financing == "1":
-    #         if list_months.get() == "3 Meses":
-    #             temp = float(d_total_price.get()) / 3
-    #             result = round(temp, 2)
-    #             d_total_monthly_fees.set(str(result))
-    #
-    #         elif list_months.get() == "10 Meses":
-    #             temp = float(d_total_price.get()) / 10
-    #             result = round(temp, 2)
-    #             d_total_monthly_fees.set(str(result))
-    #
-    #         elif list_months.get() == "20 Meses":
-    #             temp = float(d_total_price.get()) / 20
-    #             result = round(temp, 2)
-    #             d_total_monthly_fees.set(str(result))
-    #
-    #     else:
-    #         d_total_monthly_fees.set(" ")
+    def cal_financing():
+        if want_financing == "1":
+            if list_months.get() == "3 Meses":
+                temp = float(d_total_price.get()) / 3
+                result = round(temp, 2)
+                d_total_monthly_fees.set(str(result))
+
+            elif list_months.get() == "10 Meses":
+                temp = float(d_total_price.get()) / 10
+                result = round(temp, 2)
+                d_total_monthly_fees.set(str(result))
+
+            elif list_months.get() == "20 Meses":
+                temp = float(d_total_price.get()) / 20
+                result = round(temp, 2)
+                d_total_monthly_fees.set(str(result))
+
+        else:
+            d_total_monthly_fees.set(" ")
 
     def calculate():
         cal_membership()
@@ -75,7 +85,7 @@ def app():
     euros_symbol_1 = tkinter.Label(frame, text="€", font=("Arial", 15))
     euros_symbol_1.grid(row=0, column=2)
 
-    # Linea miembro clucb socios fnac
+    # Linea miembro cluc socios fnac
     are_you_member = tkinter.Label(frame, text="Tienes carnet de Socio del Fnac?", font=("Arial", 15))
     are_you_member.grid(row=1, column=0, columnspan=2, sticky="w")
 
@@ -85,22 +95,22 @@ def app():
     member_no_rbtn.grid(row=1, column=2)
 
     # Linea prgunta financiacion
-    # want_financing = tkinter.Label(frame, text="¿Quieres financiar el pago?", font=("Arial", 15))
-    # want_financing.grid(row=2, column=0)
-    # financin_yes_rbtn = tkinter.Radiobutton(frame, text="Si", variable=b_want_financing, value="1")
-    # financin_no_rbtn = tkinter.Radiobutton(frame, text="No", variable=b_want_financing, value="0")
-    # financin_yes_rbtn.grid(row=2, column=1)
-    # financin_no_rbtn.grid(row=2, column=2)
+    want_financing = tkinter.Label(frame, text="¿Quieres financiar el pago?", font=("Arial", 15))
+    want_financing.grid(row=2, column=0)
+    financin_yes_rbtn = tkinter.Radiobutton(frame, text="Si", variable=b_want_financing, value="1", command=disable_financing)
+    financin_no_rbtn = tkinter.Radiobutton(frame, text="No", variable=b_want_financing, value="0", command=disable_financing)
+    financin_yes_rbtn.grid(row=2, column=1)
+    financin_no_rbtn.grid(row=2, column=2)
 
     # Añadir un if no socio no puedes financiar
 
     # Linea de a cuantos meses la financiacion
-    # many_months = tkinter.Label(frame, text="¿A cuantos meses quieres financiar?", font=("Arial", 15))
-    # many_months.grid(row=3, column=0, columnspan=2, sticky="w")
-    #
-    # list_months = ttk.Combobox(frame, values=list_financing_months, width=8)
-    # list_months.set("Meses")
-    # list_months.grid(row=3, column=1, sticky="e")
+    many_months = tkinter.Label(frame, text="¿A cuantos meses quieres financiar?", font=("Arial", 15))
+    many_months.grid(row=3, column=0, columnspan=2, sticky="w")
+
+    list_months = ttk.Combobox(frame, values=list_financing_months, width=8)
+    list_months.set("Meses")
+    list_months.grid(row=3, column=1, sticky="e")
 
     # Añadir funcion para recuperar la seleccion
 
@@ -125,14 +135,14 @@ def app():
 
     # Linea total mensualidades
 
-    # monthly_fees = tkinter.Label(frame, text="Mensualidades:", font=("Arial", 15))
-    # monthly_fees.grid(row=7, column=0, sticky="w")
-    #
-    # total_monthly_fees = tkinter.Label(frame, textvariable=d_total_monthly_fees, font=("Arial", 15), relief="sunken")
-    # total_monthly_fees.grid(row=7, column=1, sticky="w")
-    #
-    # euros_symbol_3 = tkinter.Label(frame, text="€/mes", font=("Arial", 15))
-    # euros_symbol_3.grid(row=7, column=1, sticky="e")
+    monthly_fees = tkinter.Label(frame, text="Mensualidades:", font=("Arial", 15))
+    monthly_fees.grid(row=7, column=0, sticky="w")
+
+    total_monthly_fees = tkinter.Label(frame, textvariable=d_total_monthly_fees, font=("Arial", 15), relief="sunken")
+    total_monthly_fees.grid(row=7, column=1, sticky="w")
+
+    euros_symbol_3 = tkinter.Label(frame, text="€/mes", font=("Arial", 15))
+    euros_symbol_3.grid(row=7, column=1, sticky="e")
 
     # window.update()
     window.mainloop()

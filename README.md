@@ -13,3 +13,7 @@ Utilizo Tkinter para crear la app. Cuando este funcional 100% deberia:
   
   2.Si selecionas que no eres socio, le das a financiar se bloquea la selecion, pero si despues le das que sí eres
   socio se mantiene bloqueado y no te deja selecionar.[NOT]
+  
+  3.Calcular, para la 1ª mensualidad, el 3% del valor total si selecionas 10 meses o 20 meses en la financiacion.
+  Por ejemplo, si el valor total del producto es 499.99€, el precio de socio seria 474.99€. Si financias a 3 meses es tan
+  sencillo como 474.99/3 = 158.33€. Pero si es en 10 meses seria: 1ª mensualidad 61,74€ y las 9 restantes 47,49€.
